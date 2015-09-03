@@ -1,0 +1,10 @@
+.DS_Store
+.idea
+.ant_targets
+
+vendor
+composer.phar
+phpunit.xml
+
+# this is the code coverage generated when running phpunit.
+tests/log

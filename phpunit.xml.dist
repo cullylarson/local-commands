@@ -1,0 +1,18 @@
+<phpunit bootstrap="./tests/phpunit-bootstrap.php">
+    <testsuite name="Local Commands Test Suite">
+        <directory>./tests/</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/Cully/Local/</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-html" target="./tests/log/report" charset="UTF-8"
+             yui="true" highlight="true"
+             lowUpperBound="50" highLowerBound="80"/>
+        <log type="testdox-html" target="./tests/log/testdox.html" />
+    </logging>
+</phpunit>
