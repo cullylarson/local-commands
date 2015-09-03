@@ -19,7 +19,7 @@ php composer.phar require cullylarson/local-commands
     ```
     <?php
     
-    $command = new Cully\Ssh\Command();
+    $command = new Cully\Local\Command();
     ```
 
 1. Execute your command.
