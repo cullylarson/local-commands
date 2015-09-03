@@ -23,6 +23,10 @@ class Command {
      * @var bool
      */
     private $_hasRun = false;
+    /**
+     * @var bool
+     */
+    private $forceFailure = false;
 
     /**
      * @param string    $command
@@ -30,14 +34,11 @@ class Command {
      *                              to getcwd().
      * @param array     $env        An assoc. array of environment variables to pass
      *                              to the command (e.g. env_var_name => value)
-     *
-     * @return  boolean   True if the command was run.  False if it wasn't.  This is not
-     *                    an indicator of whether the command was successful, just that it
-     *                    executed.  There is a chance that false can be returned, and the
-     *                    command still executed.  In this case we just to don't for sure
-     *                    if it executed.
      */
     public function exec($command, $cwd=null, array $env=[]) {
+        // indicate we've run, even if it doesn't work
+        $this->_hasRun = true;
+
         /*
          * Setup
          */
@@ -59,7 +60,10 @@ class Command {
         $process = proc_open($command, $descriptorspec, $pipes, $cwd, $env);
 
         // failed for some reason
-        if(!is_resource($process)) return false;
+        if(!is_resource($process)) {
+            $this->forceFailure = true;
+            return;
+        }
 
         /*
          * Get the output
@@ -78,20 +82,20 @@ class Command {
 
         $exitStatus = proc_close($process);
 
-        if($exitStatus === -1) return false;
+        if($exitStatus === -1) {
+            $this->forceFailure = true;
+            return;
+        }
 
 
         /*
          * Store what we found
          */
 
-        $this->_hasRun = true;
         $this->lastCommand = $command;
         $this->lastExitStatus = $exitStatus;
         $this->lastStandardOutput = $standardOutput;
         $this->lastErrorOutput = $errorOutput;
-
-        return true;
     }
 
     /**
@@ -111,7 +115,7 @@ class Command {
      * @return bool
      */
     public function success() {
-        return ($this->hasRun() && $this->getExitStatus() === 0);
+        return ($this->hasRun() && !$this->forceFailure && $this->getExitStatus() === 0);
     }
 
     /**
