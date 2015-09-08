@@ -4,6 +4,13 @@ namespace Cully;
 
 interface ICommand {
     /**
+     * @param string $command
+     * @param string|null $cwd  The working directory in which to execute the command
+     * @param array $env Any environment variables to set
+     * @return void
+     */
+    public function exec($command, $cwd=null, array $env=[]);
+    /**
      * @return bool
      */
     public function hasRun();
