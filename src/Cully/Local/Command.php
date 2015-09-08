@@ -2,7 +2,9 @@
 
 namespace Cully\Local;
 
-class Command {
+use Cully\ICommand;
+
+class Command implements ICommand {
     /**
      * @var string
      */
