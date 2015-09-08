@@ -11,10 +11,12 @@ interface ICommand {
      * @return void
      */
     public function exec($command, $cwd=null, array $env=[]);
+
     /**
      * @return bool
      */
     public function hasRun();
+
     /**
      * Whether the last command succeeded.  Will return FALSE if no
      * command has been executed (we haven't succeeded because we
@@ -25,6 +27,7 @@ interface ICommand {
      * @return bool
      */
     public function success();
+
     /**
      * Whether the last command failed.  This will return FALSE if no
      * command has been executed (we haven't failed because we haven't
@@ -33,12 +36,14 @@ interface ICommand {
      * @return bool
      */
     public function failure();
+
     /**
      * The last command executed.
      *
      * @return string
      */
     public function getCommand();
+
     /**
      * Will be null if a command hasn't been executed, or if the
      * last executed command didn't return an exit code.
@@ -46,12 +51,14 @@ interface ICommand {
      * @return int|null
      */
     public function getExitStatus();
+
     /**
      * Standard output from command.
      *
      * @return string
      */
     public function getOutput();
+
     /**
      * Standard error from the command.
      *
