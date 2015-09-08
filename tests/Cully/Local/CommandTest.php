@@ -118,4 +118,18 @@ class CommandTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertEmpty($command->getError());
     }
+
+    public function cwdTest() {
+        $command = new Command();
+        $command->exec("pwd", "/tmp");
+
+        $this->assertEquals("/tmp", $command->getOutput());
+    }
+
+    public function envTest() {
+        $command = new Command();
+        $command->exec("echo \$CULLY_TEST_VARIABLE", null, ["CULLY_TEST_VARIABLE" => "works"]);
+
+        $this->assertEquals("works", $command->getOutput());
+    }
 }
