@@ -42,3 +42,13 @@ php composer.phar require cullylarson/local-commands
     $command->getOutput();     // the standard output from the last command
     $command->getError();      // the error output from the last command
     ```
+
+## The `exec` Function
+
+1. `$command` _(string)_ The command you want to execute (e.g. `ls`).
+
+1. `$cwd` _(string)_ _(optional, default: null)_ The current working directory
+(the folder you want to execute the command in).
+
+1. `$env` _(array)_ _(optional, default: [])_ An array of environment variable
+that you want to make available to the command.
