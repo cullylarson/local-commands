@@ -3,7 +3,7 @@
   "type": "library",
   "description": "A library for executing local shell commands, with support for exit status, standard output, and error output.",
   "keywords": ["command-line", "shell"],
-  "homepage": "https://github.com/cullylarson/local-command",
+  "homepage": "https://github.com/cullylarson/local-commands",
   "license": "MIT",
   "authors": [{
     "name": "Cully Larson",
